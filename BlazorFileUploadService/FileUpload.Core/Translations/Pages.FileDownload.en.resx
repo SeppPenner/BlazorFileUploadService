@@ -137,4 +137,8 @@
     <value>File type:</value>
     <comment>The file type text on the page.</comment>
   </data>
+  <data name="No file found." xml:space="preserve">
+    <value>No file found.</value>
+    <comment>The "no file found" text on the page.</comment>
+  </data>
 </root>

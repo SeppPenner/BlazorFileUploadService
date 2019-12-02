@@ -3,10 +3,10 @@
 @inject IStringLocalizer<FileDownload> Localizer
 @using Microsoft.Extensions.Localization
 
-<h1>@Localizer["Download files"]</h1>
-
 @if (File != null)
 {
+    <h1>@Localizer["Download files"]</h1>
+
     <div class="file-row">
         <div>
             <h2>@File.FileName</h2>
@@ -18,4 +18,8 @@
             <span>@Localizer["Download file"]</span>
         </button>
     </div>
+}
+else
+{
+    <h1>@Localizer["No file found."]</h1>
 }
