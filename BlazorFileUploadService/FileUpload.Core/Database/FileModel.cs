@@ -28,5 +28,15 @@ namespace FileUpload.Core.Database
         /// Gets or sets the original file name.
         /// </summary>
         public string FileName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the file size.
+        /// </summary>
+        public long Size { get; set; }
+
+        /// <summary>
+        /// Gets or sets the file type.
+        /// </summary>
+        public string Type { get; set; }
     }
 }

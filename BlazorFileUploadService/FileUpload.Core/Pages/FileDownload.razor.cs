@@ -10,12 +10,15 @@
 namespace FileUpload.Core.Pages
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
 
     using global::FileUpload.Core.Database;
 
     using Microsoft.AspNetCore.Components;
     using Microsoft.JSInterop;
+
+    using Serilog;
 
     /// <summary>
     ///     This class contains the logic for the <see cref="FileDownload" /> page.
@@ -62,7 +65,7 @@ namespace FileUpload.Core.Pages
             }
             catch (Exception ex)
             {
-                await this.JavascriptRuntime.InvokeAsync<string>("console.log", $"Exception: {ex.Message} {ex.StackTrace}");
+                await this.TryLogError(ex);
             }
         }
 
@@ -70,6 +73,7 @@ namespace FileUpload.Core.Pages
         /// Downloads the file.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
+        // ReSharper disable once UnusedMember.Global
         protected async Task DownloadFile()
         {
             try
@@ -78,9 +82,28 @@ namespace FileUpload.Core.Pages
             }
             catch (Exception ex)
             {
-                await this.JavascriptRuntime.InvokeAsync<string>("console.log", $"Exception: {ex.Message} {ex.StackTrace}");
+                await this.TryLogError(ex);
+            }
+        }
+
+        /// <summary>
+        /// ´Tries to log the error to the Browser console and Serilog, catches errors and only logs to Serilog if needed.
+        /// </summary>
+        /// <param name="ex">The <see cref="Exception"/> to catch.</param>
+        /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
+        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+        private async Task TryLogError(Exception ex)
+        {
+            try
+            {
+                var message = $"Exception: {ex.Message} {ex.StackTrace}";
+                await this.JavascriptRuntime.InvokeAsync<string>("console.log", message);
+                Log.Error(message);
+            }
+            catch (Exception exception)
+            {
+                Log.Error($"Exception: {exception.Message} {exception.StackTrace}");
             }
         }
     }
-
 }

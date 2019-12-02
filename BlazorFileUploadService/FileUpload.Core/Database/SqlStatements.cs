@@ -24,7 +24,9 @@ namespace FileUpload.Core.Database
             @"CREATE TABLE IF NOT EXISTS files (
                 id                      TEXT            NOT NULL PRIMARY KEY,
                 filepath                TEXT            NOT NULL,
-                filename                TEXT            NOT NULL
+                filename                TEXT            NOT NULL,
+                size                    INTEGER         NOT NULL,
+                type                    TEXT            NOT NULL
             );";
 
         /// <summary>
@@ -32,7 +34,7 @@ namespace FileUpload.Core.Database
         /// </summary>
         [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static string SelectFileById =
-            @"SELECT id, filepath, filename
+            @"SELECT id, filepath, filename, size, type
             FROM files
             WHERE id = @Id;";
 
@@ -41,8 +43,8 @@ namespace FileUpload.Core.Database
         /// </summary>
         [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static string InsertFile =
-            @"INSERT INTO files (id, filepath, filename)
-            VALUES (@Id, @FilePath, @FileName);";
+            @"INSERT INTO files (id, filepath, filename, size, type)
+            VALUES (@Id, @FilePath, @FileName, @Size, @Type);";
 
         /// <summary>
         /// A SQL query string to check whether the files table exists.

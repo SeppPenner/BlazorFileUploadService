@@ -1,10 +1,13 @@
-﻿<main>
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<App> Localizer
+
+<main>
     <Router AppAssembly="typeof(App).Assembly" Context="routeData">
         <Found>
             <RouteView RouteData="@routeData" />
         </Found>
         <NotFound>
-            <p>Sorry, there's nothing here.</p>
+            <p>@Localizer["This page doesn't exist."]</p>
         </NotFound>
     </Router>
 </main>

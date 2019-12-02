@@ -12,6 +12,8 @@ namespace FileUpload.Server
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
 
+    using Serilog;
+
     /// <summary>
     /// This class runs the server part.
     /// </summary>
@@ -23,6 +25,12 @@ namespace FileUpload.Server
         /// <param name="args">Some arguments.</param>
         public static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                .WriteTo.Trace()
+                .CreateLogger();
+
             CreateHostBuilder(args).Build().Run();
         }
 

@@ -10,6 +10,7 @@
 namespace FileUpload.Core.Pages
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace FileUpload.Core.Pages
     using Microsoft.AspNetCore.Components;
     using Microsoft.JSInterop;
 
+    using Serilog;
 
     /// <summary>
     ///     This class contains the logic for the <see cref="FileUpload" /> page.
@@ -69,7 +71,7 @@ namespace FileUpload.Core.Pages
         /// <returns></returns>
         protected string GetDownloadLink(IFileListEntry file)
         {
-            return $"{this.NavigationManager.BaseUri}file/{file.NewFileName}";
+            return string.IsNullOrWhiteSpace(file.NewFileName) ? string.Empty : $"{this.NavigationManager.BaseUri}file/{file.NewFileName}";
         }
 
         /// <summary>
@@ -84,7 +86,7 @@ namespace FileUpload.Core.Pages
         /// <returns>A <see cref="T:System.Threading.Tasks.Task" /> representing any asynchronous operation.</returns>
         /// <remarks>
         /// The <see cref="M:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(System.Boolean)" /> and <see cref="M:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync(System.Boolean)" /> lifecycle methods
-        /// are useful for performing interop, or interacting with values recieved from <c>@ref</c>.
+        /// are useful for performing interop, or interacting with values received from <c>@ref</c>.
         /// Use the <paramref name="firstRender" /> parameter to ensure that initialization work is only performed
         /// once.
         /// </remarks>
@@ -103,7 +105,7 @@ namespace FileUpload.Core.Pages
             }
             catch (Exception ex)
             {
-                await this.JavascriptRuntime.InvokeAsync<string>("console.log", $"Exception: {ex.Message} {ex.StackTrace}");
+                await this.TryLogError(ex);
             }
         }
 
@@ -128,11 +130,31 @@ namespace FileUpload.Core.Pages
 
                 using Stream stream = File.Create(filePath);
                 await file.Data.CopyToAsync(stream);
-                await this.DatabaseHelper.InsertFile(new FileModel { Id = randomFileName, FileName = file.Name, FilePath = filePath });
+                await this.DatabaseHelper.InsertFile(new FileModel { Id = randomFileName, FileName = file.Name, FilePath = filePath, Size = file.Size, Type = file.Type});
             }
             catch (Exception ex)
             {
-                await this.JavascriptRuntime.InvokeAsync<string>("console.log", $"Exception: {ex.Message} {ex.StackTrace}");
+                await this.TryLogError(ex);
+            }
+        }
+
+        /// <summary>
+        /// ´Tries to log the error to the Browser console and Serilog, catches errors and only logs to Serilog if needed.
+        /// </summary>
+        /// <param name="ex">The <see cref="Exception"/> to catch.</param>
+        /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
+        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+        private async Task TryLogError(Exception ex)
+        {
+            try
+            {
+                var message = $"Exception: {ex.Message} {ex.StackTrace}";
+                await this.JavascriptRuntime.InvokeAsync<string>("console.log", message);
+                Log.Error(message);
+            }
+            catch (Exception exception)
+            {
+                Log.Error($"Exception: {exception.Message} {exception.StackTrace}");
             }
         }
     }

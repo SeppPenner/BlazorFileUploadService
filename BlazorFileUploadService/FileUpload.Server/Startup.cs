@@ -14,6 +14,7 @@ namespace FileUpload.Server
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http.Features;
+    using Microsoft.AspNetCore.Localization;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -46,6 +47,7 @@ namespace FileUpload.Server
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<IDatabaseHelper, DatabaseHelper>();
+            services.AddLocalization(options => options.ResourcesPath = "Translations");
         }
 
         /// <summary>
@@ -74,6 +76,15 @@ namespace FileUpload.Server
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseRequestLocalization(options =>
+            {
+                options.AddSupportedCultures("en-US", "de-DE");
+                options.AddSupportedUICultures("en-US", "de-DE");
+                options.RequestCultureProviders.Clear();
+                options.RequestCultureProviders.Add(new CookieRequestCultureProvider());
+                options.SetDefaultCulture("de-DE");
+            });
 
             app.UseRouting();
 
