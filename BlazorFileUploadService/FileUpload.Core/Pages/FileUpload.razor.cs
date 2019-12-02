@@ -18,6 +18,8 @@ namespace FileUpload.Core.Pages
     using global::FileUpload.Core.Database;
 
     using Microsoft.AspNetCore.Components;
+    using Microsoft.JSInterop;
+
 
     /// <summary>
     ///     This class contains the logic for the <see cref="FileUpload" /> page.
@@ -35,6 +37,13 @@ namespace FileUpload.Core.Pages
         [Inject]
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private IDatabaseHelper DatabaseHelper { get; set; }
+
+        /// <summary>
+        /// Gets or sets the JavaScript runtime.
+        /// </summary>
+        [Inject]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        private IJSRuntime JavascriptRuntime { get; set; }
 
         /// <summary>
         /// Gets or sets the navigation manager.
@@ -64,19 +73,22 @@ namespace FileUpload.Core.Pages
         }
 
         /// <summary>
-        /// Method invoked after each time the component has been rendered.
+        /// Method invoked after each time the component has been rendered. Note that the component does
+        /// not automatically re-render after the completion of any returned <see cref="T:System.Threading.Tasks.Task" />, because
+        /// that would cause an infinite render loop.
         /// </summary>
         /// <param name="firstRender">
         /// Set to <c>true</c> if this is the first time <see cref="M:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(System.Boolean)" /> has been invoked
         /// on this component instance; otherwise <c>false</c>.
         /// </param>
+        /// <returns>A <see cref="T:System.Threading.Tasks.Task" /> representing any asynchronous operation.</returns>
         /// <remarks>
         /// The <see cref="M:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(System.Boolean)" /> and <see cref="M:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync(System.Boolean)" /> lifecycle methods
-        /// are useful for performing interop, or interacting with values received from <c>@ref</c>.
+        /// are useful for performing interop, or interacting with values recieved from <c>@ref</c>.
         /// Use the <paramref name="firstRender" /> parameter to ensure that initialization work is only performed
         /// once.
         /// </remarks>
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (!firstRender)
             {
@@ -87,11 +99,11 @@ namespace FileUpload.Core.Pages
             {
                 this.DatabaseHelper.CreateFilesFolderIfNotExist();
                 this.DatabaseHelper.CreateDatabaseIfNotExists();
-                this.DatabaseHelper.CreateFilesTableIfNotExists();
+                await this.DatabaseHelper.CreateFilesTableIfNotExists();
             }
             catch (Exception ex)
             {
-                
+                await this.JavascriptRuntime.InvokeAsync<string>("console.log", $"Exception: {ex.Message} {ex.StackTrace}");
             }
         }
 
@@ -120,6 +132,7 @@ namespace FileUpload.Core.Pages
             }
             catch (Exception ex)
             {
+                await this.JavascriptRuntime.InvokeAsync<string>("console.log", $"Exception: {ex.Message} {ex.StackTrace}");
             }
         }
     }

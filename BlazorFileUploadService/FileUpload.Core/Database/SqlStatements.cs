@@ -33,8 +33,8 @@ namespace FileUpload.Core.Database
         [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static string SelectFileById =
             @"SELECT id, filepath, filename
-            WHERE id = @Id
-            FROM files;";
+            FROM files
+            WHERE id = @Id;";
 
         /// <summary>
         /// A SQL query string to insert a file into the database.

@@ -15,6 +15,7 @@ namespace FileUpload.Core.Pages
     using global::FileUpload.Core.Database;
 
     using Microsoft.AspNetCore.Components;
+    using Microsoft.JSInterop;
 
     /// <summary>
     ///     This class contains the logic for the <see cref="FileDownload" /> page.
@@ -35,6 +36,13 @@ namespace FileUpload.Core.Pages
         protected FileModel File { get; set; }
 
         /// <summary>
+        /// Gets or sets the JavaScript runtime.
+        /// </summary>
+        [Inject]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        private IJSRuntime JavascriptRuntime { get; set; }
+
+        /// <summary>
         ///     Gets or sets the database helper.
         /// </summary>
         [Inject]
@@ -53,7 +61,7 @@ namespace FileUpload.Core.Pages
             }
             catch (Exception ex)
             {
-
+                await this.JavascriptRuntime.InvokeAsync<string>("console.log", $"Exception: {ex.Message} {ex.StackTrace}");
             }
         }
 
@@ -69,7 +77,7 @@ namespace FileUpload.Core.Pages
             }
             catch (Exception ex)
             {
-
+                await this.JavascriptRuntime.InvokeAsync<string>("console.log", $"Exception: {ex.Message} {ex.StackTrace}");
             }
         }
     }
