@@ -21,6 +21,11 @@ namespace FileUpload.Core.Database
         /// </summary>
         void CreateFilesFolderIfNotExist();
 
+        /// <summary>
+        /// Creates the database folder if it doesn't exist.
+        /// </summary>
+        void CreateDatabaseFolderIfNotExist();
+
         /// <inheritdoc cref="IDatabaseHelper" />
         /// <summary>
         /// Creates the database folder and file if it doesn't exist.
@@ -46,6 +51,12 @@ namespace FileUpload.Core.Database
         /// </summary>
         /// <returns>The files path as <see cref="string"/>.</returns>
         string GetFilesPath();
+
+        /// <summary>
+        /// Gets the database path.
+        /// </summary>
+        /// <returns>The database path as <see cref="string"/>.</returns>
+        string GetDatabasePath();
 
         /// <summary>
         /// Inserts a <see cref="FileModel"/> into the table.

@@ -46,6 +46,7 @@ namespace FileUpload.Core.Pages
         ///     Gets or sets the database helper.
         /// </summary>
         [Inject]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private IDatabaseHelper DatabaseHelper { get; set; }
 
         /// <summary>

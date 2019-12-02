@@ -1,5 +1,4 @@
 Todo:
 
 * Add localization
-* Move data source to bin/... folder?!
 * Add possibility to download files.
