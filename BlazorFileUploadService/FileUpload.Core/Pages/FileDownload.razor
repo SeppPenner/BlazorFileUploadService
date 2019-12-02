@@ -1,0 +1,15 @@
+﻿@page "/file/{fileId}"
+@inherits FileDownloadBase
+
+<h1>Found file</h1>
+
+@if (File != null)
+{
+    <div class="file-row">
+        <div>
+            <h2>@File.FileName</h2>
+        </div>
+
+        <button @onclick="() => DownloadFile()" />
+    </div>
+}

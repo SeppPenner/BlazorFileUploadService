@@ -1,0 +1,54 @@
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SqlStatements.cs" company="Haemmer Electronics">
+//   Copyright (c) 2019 All rights reserved.
+// </copyright>
+// <summary>
+//   This class contains the SQL statements to interact with the database.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace FileUpload.Core.Database
+{
+    using System.Diagnostics.CodeAnalysis;
+
+    /// <summary>
+    /// This class contains the SQL statements to interact with the database.
+    /// </summary>
+    public static class SqlStatements
+    {
+        /// <summary>
+        /// A SQL query string to create the files table.
+        /// </summary>
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
+        public static string CreateFilesTable =
+            @"CREATE TABLE IF NOT EXISTS files (
+                id                      TEXT            NOT NULL PRIMARY KEY,
+                filepath                TEXT            NOT NULL,
+                filename                TEXT            NOT NULL
+            );";
+
+        /// <summary>
+        /// A SQL query string to select a file by its identifier.
+        /// </summary>
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
+        public static string SelectFileById =
+            @"SELECT id, filepath, filename
+            WHERE id = @Id
+            FROM files;";
+
+        /// <summary>
+        /// A SQL query string to insert a file into the database.
+        /// </summary>
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
+        public static string InsertFile =
+            @"INSERT INTO files (id, filepath, filename)
+            VALUES (@Id, @FilePath, @FileName);";
+
+        /// <summary>
+        /// A SQL query string to check whether the files table exists.
+        /// </summary>
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
+        public static string CheckFilesTableExists =
+            @"SELECT count(name) FROM sqlite_master WHERE type='table' AND name='files';";
+    }
+}

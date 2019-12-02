@@ -1,0 +1,7 @@
+<Project>
+    <PropertyGroup>
+        <ServerPackagesVersion>3.0.0-preview9.19465.2</ServerPackagesVersion>
+        <ClientPackagesVersion>3.0.0-preview9.19465.2</ClientPackagesVersion>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+</Project>

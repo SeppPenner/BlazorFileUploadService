@@ -1,0 +1,25 @@
+﻿@using System.Threading.Tasks
+@inherits InputFileBase
+
+<input type="file" @ref="InputFileElement" @attributes="UnmatchedParameters" />
+
+@code
+{
+    /// <summary>
+    ///     Notifies the UI about the changes.
+    /// </summary>
+    /// <param name="files">The files.</param>
+    /// <returns>A <see cref="Task" /> representing any asynchronous operation.</returns>
+    [JSInvokable]
+    // ReSharper disable once UnusedMember.Global
+    public Task NotifyChange(FileListEntry[] files)
+    {
+        foreach (var file in files)
+        {
+            // So that method invocations on the file can be dispatched back here
+            file.Owner = (InputFile)this;
+        }
+
+        return this.OnChange.InvokeAsync(files);
+    }
+}
