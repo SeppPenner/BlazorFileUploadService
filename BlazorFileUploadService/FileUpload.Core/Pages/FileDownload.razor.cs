@@ -20,6 +20,8 @@ namespace FileUpload.Core.Pages
 
     using Serilog;
 
+    using IoFile = System.IO.File;
+
     /// <summary>
     ///     This class contains the logic for the <see cref="FileDownload" /> page.
     /// </summary>
@@ -78,7 +80,8 @@ namespace FileUpload.Core.Pages
         {
             try
             {
-                // Todo: Download
+                var fileData = IoFile.ReadAllBytes(this.File.FilePath);
+                await this.JavascriptRuntime.InvokeAsync<string>("window.downloadHelper.downloadFile", fileData, this.File.FileName, this.File.Type);
             }
             catch (Exception ex)
             {

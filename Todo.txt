@@ -1,4 +1,0 @@
-Todo:
-
-* Add possibility to download files.
-* Calculate file size (not only bytes, but kilos, megas, ...)
