@@ -1,6 +1,6 @@
 ﻿@page "/"
 @inject NavigationManager NavigationManager
-@inject  IStringLocalizer<FileUpload> Localizer
+@inject IStringLocalizer<FileUpload> Localizer
 @using Microsoft.Extensions.Localization
 @inherits FileUploadBase
 
@@ -17,7 +17,7 @@
         <div class="file-row">
             <div>
                 <h2>@file.Name</h2>
-                @Localizer["File size:"] <strong>@file.Size @Localizer["bytes"]</strong>
+                @Localizer["File size:"] <strong>@Helper.FileSizeHelper.GetFormattedFileSize(file.Size)</strong>
                 @Localizer["Last modified:"] <strong>@file.LastModified.ToString("G")</strong>
                 @Localizer["File type:"] <strong>@file.Type</strong>
                 @Localizer["Download link:"]
