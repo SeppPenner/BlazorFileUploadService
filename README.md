@@ -26,6 +26,7 @@ The project is heavily based on the [BlazorInputFile](https://github.com/SteveSa
 * https://megaupload.nz/
 * https://share-online.is/
 * https://rapidshare.nu/
+* https://forumfiles.com/
 
 ## Further links:
 * https://blog.stevensanderson.com/2019/09/13/blazor-inputfile/
