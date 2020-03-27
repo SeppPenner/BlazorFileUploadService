@@ -23,10 +23,11 @@ The project is heavily based on the [BlazorInputFile](https://github.com/SteveSa
 * https://anonfiles.com/
 * https://openload.cc/
 * https://letsupload.cc/
-* https://megaupload.nz/
+* ~~https://megaupload.nz/~~
 * https://share-online.is/
 * https://rapidshare.nu/
 * https://forumfiles.com/
+* https://vshare.is/
 
 ## Further links:
 * https://blog.stevensanderson.com/2019/09/13/blazor-inputfile/
