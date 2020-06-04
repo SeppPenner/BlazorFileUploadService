@@ -18,7 +18,7 @@ namespace FileUpload.Core.Helper
         /// Gets the file size and unit name formatted properly.
         /// </summary>
         /// <param name="bytes">The amount of bytes.</param>
-        /// <returns>A <see cref="string"/> represenating the formatted file size.</returns>
+        /// <returns>A <see cref="string"/> representing the formatted file size.</returns>
         public static string GetFormattedFileSize(decimal bytes)
         {
             if (bytes < 1024)

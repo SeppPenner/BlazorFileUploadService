@@ -24,6 +24,7 @@ namespace FileUpload.Core.Database
         /// <summary>
         /// Creates the database folder if it doesn't exist.
         /// </summary>
+        // ReSharper disable once UnusedMemberInSuper.Global
         void CreateDatabaseFolderIfNotExist();
 
         /// <inheritdoc cref="IDatabaseHelper" />
@@ -56,6 +57,7 @@ namespace FileUpload.Core.Database
         /// Gets the database path.
         /// </summary>
         /// <returns>The database path as <see cref="string"/>.</returns>
+        // ReSharper disable once UnusedMemberInSuper.Global
         string GetDatabasePath();
 
         /// <summary>

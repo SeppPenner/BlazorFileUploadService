@@ -14,7 +14,7 @@
             @Localizer["File type:"] <strong>@File.Type</strong>
         </div>
 
-        <button @onclick="() => DownloadFile()">
+        <button @onclick="this.DownloadFile">
             <span>@Localizer["Download file"]</span>
         </button>
     </div>

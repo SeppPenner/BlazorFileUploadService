@@ -55,6 +55,11 @@ namespace FileUpload.Core.Pages
         private NavigationManager NavigationManager { get; set; }
 
         /// <summary>
+        /// The logger.
+        /// </summary>
+        private readonly ILogger logger = Log.ForContext<FileUploadBase>();
+
+        /// <summary>
         /// Handles the selected files.
         /// </summary>
         /// <param name="files">The files.</param>
@@ -150,11 +155,11 @@ namespace FileUpload.Core.Pages
             {
                 var message = $"Exception: {ex.Message} {ex.StackTrace}";
                 await this.JavascriptRuntime.InvokeAsync<string>("console.log", message);
-                Log.Error(message);
+                this.logger.Error(message);
             }
             catch (Exception exception)
             {
-                Log.Error($"Exception: {exception.Message} {exception.StackTrace}");
+                this.logger.Error("An error occured: {exception}.", exception);
             }
         }
     }

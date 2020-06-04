@@ -55,6 +55,11 @@ namespace FileUpload.Core.Pages
         private IDatabaseHelper DatabaseHelper { get; set; }
 
         /// <summary>
+        /// The logger.
+        /// </summary>
+        private readonly ILogger logger = Log.ForContext<FileDownloadBase>();
+
+        /// <summary>
         /// Method invoked when the component has received parameters from its parent in
         /// the render tree, and the incoming values have been assigned to properties.
         /// </summary>
@@ -101,11 +106,11 @@ namespace FileUpload.Core.Pages
             {
                 var message = $"Exception: {ex.Message} {ex.StackTrace}";
                 await this.JavascriptRuntime.InvokeAsync<string>("console.log", message);
-                Log.Error(message);
+                this.logger.Error(message);
             }
             catch (Exception exception)
             {
-                Log.Error($"Exception: {exception.Message} {exception.StackTrace}");
+                this.logger.Error("An error occured: {exception}.", exception);
             }
         }
     }

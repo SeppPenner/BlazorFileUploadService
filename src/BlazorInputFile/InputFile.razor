@@ -1,5 +1,4 @@
-﻿@using System.Threading.Tasks
-@inherits InputFileBase
+﻿@inherits InputFileBase
 
 <input type="file" @ref="InputFileElement" @attributes="UnmatchedParameters" />
 
@@ -17,9 +16,9 @@
         foreach (var file in files)
         {
             // So that method invocations on the file can be dispatched back here
-            file.Owner = (InputFile)this;
+            file.Owner = this;
         }
 
-        return this.OnChange.InvokeAsync(files);
+        return OnChange.InvokeAsync(files);
     }
 }

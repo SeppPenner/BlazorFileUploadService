@@ -14,6 +14,7 @@ namespace BlazorInputFile
     /// <summary>
     /// This struct contains block data for the <see cref="RemoteFileListEntryStream"/>.
     /// </summary>
+    // ReSharper disable once StructCanBeMadeReadOnly
     public struct Block
     {
         /// <summary>

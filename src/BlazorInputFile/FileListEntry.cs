@@ -25,7 +25,7 @@ namespace BlazorInputFile
         /// <summary>
         /// The stream.
         /// </summary>
-        private Stream _stream;
+        private Stream stream;
 
         /// <summary>
         /// The event that is called when the data is read.
@@ -69,8 +69,8 @@ namespace BlazorInputFile
         {
             get
             {
-                _stream ??= Owner.OpenFileStream(this);
-                return _stream;
+                this.stream ??= this.Owner.OpenFileStream(this);
+                return this.stream;
             }
         }
 
@@ -79,7 +79,7 @@ namespace BlazorInputFile
         /// </summary>
         internal void RaiseOnDataRead()
         {
-            OnDataRead?.Invoke(this, null);
+            this.OnDataRead?.Invoke(this, null);
         }
     }
 }

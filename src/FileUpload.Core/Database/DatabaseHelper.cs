@@ -155,7 +155,7 @@ namespace FileUpload.Core.Database
         {
             using var connection = new SQLiteConnection(this.GetConnectionString());
             await connection.OpenAsync();
-            var checkTableExistsResult = connection.ExecuteScalar(SqlStatements.CheckFilesTableExists);
+            var checkTableExistsResult = await connection.ExecuteScalarAsync(SqlStatements.CheckFilesTableExists);
             if (checkTableExistsResult == null || Convert.ToInt32(checkTableExistsResult) == 0)
             {
                 await connection.ExecuteAsync(SqlStatements.CreateFilesTable);

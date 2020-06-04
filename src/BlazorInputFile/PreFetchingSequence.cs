@@ -93,11 +93,9 @@ namespace BlazorInputFile
                 result = this.buffer.Peek();
                 return true;
             }
-            else
-            {
-                result = default;
-                return false;
-            }
+
+            result = default;
+            return false;
         }
 
         /// <summary>
