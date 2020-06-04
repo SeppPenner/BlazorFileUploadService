@@ -1,0 +1,25 @@
+﻿@page "/file/{fileId}"
+@inherits FileDownloadBase
+@inject IStringLocalizer<FileDownload> Localizer
+@using Microsoft.Extensions.Localization
+
+@if (File != null)
+{
+    <h1>@Localizer["Download files"]</h1>
+
+    <div class="file-row">
+        <div>
+            <h2>@File.FileName</h2>
+            @Localizer["File size:"] <strong>@Helper.FileSizeHelper.GetFormattedFileSize(File.Size)</strong>
+            @Localizer["File type:"] <strong>@File.Type</strong>
+        </div>
+
+        <button @onclick="() => DownloadFile()">
+            <span>@Localizer["Download file"]</span>
+        </button>
+    </div>
+}
+else
+{
+    <h1>@Localizer["No file found."]</h1>
+}
