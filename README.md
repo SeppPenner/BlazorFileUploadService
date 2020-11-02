@@ -29,6 +29,9 @@ The project is heavily based on the [BlazorInputFile](https://github.com/SteveSa
 * https://forumfiles.com/
 * https://vshare.is/
 * https://uplovd.com/
+* https://ddownload.com/
+* https://douploads.net/
+* http://hexupload.net/
 
 ## Further links:
 * https://blog.stevensanderson.com/2019/09/13/blazor-inputfile/
