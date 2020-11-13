@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PreFetchingSequence.cs" company="Haemmer Electronics">
+// <copyright file="PreFetchingSequence.cs" company="Hämmer Electronics">
 //   Copyright (c) 2019 All rights reserved.
 // </copyright>
 // <summary>

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DatabaseHelper.cs" company="Haemmer Electronics">
+// <copyright file="DatabaseHelper.cs" company="Hämmer Electronics">
 //   Copyright (c) 2019 All rights reserved.
 // </copyright>
 // <summary>

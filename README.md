@@ -2,7 +2,7 @@ BlazorFileUploadService
 ====================================
 
 BlazorFileUploadService is a project to provide a simple file-sharing service using [Blazor](https://github.com/aspnet/Blazor).
-The project was written and tested in .NetCore 3.1.
+The project was written and tested in .Net 5.0.
 
 The project is heavily based on the [BlazorInputFile](https://github.com/SteveSandersonMS/BlazorInputFile) code from [@SteveSandersonMS](https://github.com/SteveSandersonMS).
 

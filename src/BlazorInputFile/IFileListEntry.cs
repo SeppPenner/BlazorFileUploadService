@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IFileListEntry.cs" company="Haemmer Electronics">
+// <copyright file="IFileListEntry.cs" company="Hämmer Electronics">
 //   Copyright (c) 2019 All rights reserved.
 // </copyright>
 // <summary>

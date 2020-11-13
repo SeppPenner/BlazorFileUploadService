@@ -1,21 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-    <LangVersion>8.0</LangVersion>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <LangVersion>preview</LangVersion>
-    <PackageVersion>0.1.0-preview-00002</PackageVersion>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="5.3.5">
+    <PackageReference Include="GitVersionTask" Version="5.5.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
   </ItemGroup>
 
 </Project>
