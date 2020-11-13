@@ -11,6 +11,7 @@ namespace BlazorInputFile
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
     /// <summary>
@@ -35,6 +36,7 @@ namespace BlazorInputFile
         /// The number of fetchable items.
         /// </summary>
         // ReSharper disable once InconsistentNaming
+        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         private readonly long totalFetchableItems;
 
         /// <summary>
@@ -55,6 +57,7 @@ namespace BlazorInputFile
         /// <param name="fetchCallback">The fetch callback.</param>
         /// <param name="totalFetchableItems">The number of fetchable items.</param>
         /// <param name="maximumBufferCapacity">The maximum buffer capacity.</param>
+        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public PreFetchingSequence(Func<long, CancellationToken, T> fetchCallback, long totalFetchableItems, int maximumBufferCapacity)
         {
             this.fetchCallback = fetchCallback;
