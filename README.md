@@ -18,6 +18,9 @@ The project is heavily based on the [BlazorInputFile](https://github.com/SteveSa
 ![Screenshot 2](Screenshot2.PNG "Screenshot 2")
 ![Screenshot 3](Screenshot3.PNG "Screenshot 3")
 
+## Hints:
+The WebAssembly project doesn't work yet.
+
 ## Inspired by:
 * https://bayfiles.com/
 * https://anonfiles.com/
