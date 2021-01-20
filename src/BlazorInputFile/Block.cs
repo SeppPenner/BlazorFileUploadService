@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Block.cs" company="Hämmer Electronics">
-//   Copyright (c) 2019 All rights reserved.
+//   The project is licensed under the MIT license.
 // </copyright>
 // <summary>
 //   This struct contains block data for the <see cref="RemoteFileListEntryStream"/>.

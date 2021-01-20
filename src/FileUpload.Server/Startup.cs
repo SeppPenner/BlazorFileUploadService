@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Startup.cs" company="Hämmer Electronics">
-//   Copyright (c) 2019 All rights reserved.
+//   The project is licensed under the MIT license.
 // </copyright>
 // <summary>
 //   This class does all the startup configuration for the server part.

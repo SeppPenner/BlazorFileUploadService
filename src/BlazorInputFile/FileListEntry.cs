@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FileListEntry.cs" company="Hämmer Electronics">
-//   Copyright (c) 2019 All rights reserved.
+//   The project is licensed under the MIT license.
 // </copyright>
 // <summary>
 //   This class contains the information about the files that are uploaded.

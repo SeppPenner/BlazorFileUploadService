@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="SqlStatements.cs" company="Hämmer Electronics">
-//   Copyright (c) 2019 All rights reserved.
+//   The project is licensed under the MIT license.
 // </copyright>
 // <summary>
 //   This class contains the SQL statements to interact with the database.
