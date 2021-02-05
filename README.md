@@ -13,15 +13,15 @@ The project is heavily based on the [BlazorInputFile](https://github.com/SteveSa
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/SeppPenner/BlazorFileUploadService/master/License.txt)
 [![Known Vulnerabilities](https://snyk.io/test/github/SeppPenner/BlazorFileUploadService/badge.svg)](https://snyk.io/test/github/SeppPenner/BlazorFileUploadService)
 
-## Screenshots:
+## Screenshots
 ![Screenshot 1](Screenshot1.PNG "Screenshot 1")
 ![Screenshot 2](Screenshot2.PNG "Screenshot 2")
 ![Screenshot 3](Screenshot3.PNG "Screenshot 3")
 
-## Hints:
+## Hints
 The WebAssembly project doesn't work yet.
 
-## Inspired by:
+## Inspired by
 * https://bayfiles.com/
 * https://anonfiles.com/
 * https://openload.cc/
@@ -36,7 +36,7 @@ The WebAssembly project doesn't work yet.
 * https://douploads.net/
 * http://hexupload.net/
 
-## Further links:
+## Further links
 * https://blog.stevensanderson.com/2019/09/13/blazor-inputfile/
 * https://github.com/SteveSandersonMS/BlazorInputFile
 * https://www.nuget.org/packages/BlazorInputFile
