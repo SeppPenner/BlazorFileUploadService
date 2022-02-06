@@ -9,8 +9,6 @@
 
 namespace FileUpload.Core.Database
 {
-    using System.Diagnostics.CodeAnalysis;
-
     /// <summary>
     /// This class contains the SQL statements to interact with the database.
     /// </summary>
