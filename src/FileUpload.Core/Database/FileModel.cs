@@ -17,17 +17,17 @@ namespace FileUpload.Core.Database
         /// <summary>
         /// Gets or sets the identifier. (A random file name used on the server side).
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the path to the file.
         /// </summary>
-        public string FilePath { get; set; }
+        public string FilePath { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the original file name.
         /// </summary>
-        public string FileName { get; set; }
+        public string FileName { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the file size.
@@ -37,6 +37,6 @@ namespace FileUpload.Core.Database
         /// <summary>
         /// Gets or sets the file type.
         /// </summary>
-        public string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
     }
 }

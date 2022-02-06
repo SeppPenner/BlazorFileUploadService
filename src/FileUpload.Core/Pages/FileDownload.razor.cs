@@ -10,7 +10,6 @@
 namespace FileUpload.Core.Pages
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
 
     using global::FileUpload.Core.Database;
@@ -31,28 +30,24 @@ namespace FileUpload.Core.Pages
         ///     Gets or sets the file identifier.
         /// </summary>
         [Parameter]
-
-        // ReSharper disable once UnusedMember.Global
-        public string FileId { get; set; }
+        public string FileId { get; set; } = string.Empty;
 
         /// <summary>
         ///     Gets or sets the file model.
         /// </summary>
-        protected FileModel File { get; set; }
+        protected FileModel File { get; set; } = new();
 
         /// <summary>
         /// Gets or sets the JavaScript runtime.
         /// </summary>
         [Inject]
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        private IJSRuntime JavascriptRuntime { get; set; }
+        private IJSRuntime? JavascriptRuntime { get; set; }
 
         /// <summary>
         ///     Gets or sets the database helper.
         /// </summary>
         [Inject]
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        private IDatabaseHelper DatabaseHelper { get; set; }
+        private IDatabaseHelper DatabaseHelper { get; set; } = new DatabaseHelper();
 
         /// <summary>
         /// The logger.
@@ -80,12 +75,17 @@ namespace FileUpload.Core.Pages
         /// Downloads the file.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-        // ReSharper disable once UnusedMember.Global
         protected async Task DownloadFile()
         {
             try
             {
                 var fileData = IoFile.ReadAllBytes(this.File.FilePath);
+
+                if (this.JavascriptRuntime is null)
+                {
+                    return;
+                }
+
                 await this.JavascriptRuntime.InvokeAsync<string>("window.downloadHelper.downloadFile", fileData, this.File.FileName, this.File.Type);
             }
             catch (Exception ex)
@@ -99,12 +99,17 @@ namespace FileUpload.Core.Pages
         /// </summary>
         /// <param name="ex">The <see cref="Exception"/> to catch.</param>
         /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         private async Task TryLogError(Exception ex)
         {
             try
             {
                 var message = $"Exception: {ex.Message} {ex.StackTrace}";
+
+                if (this.JavascriptRuntime is null)
+                {
+                    return;
+                }
+
                 await this.JavascriptRuntime.InvokeAsync<string>("console.log", message);
                 this.logger.Error(message);
             }

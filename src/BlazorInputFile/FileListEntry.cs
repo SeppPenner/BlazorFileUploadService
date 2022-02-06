@@ -20,17 +20,17 @@ namespace BlazorInputFile
         /// <summary>
         /// The component owner of the file.
         /// </summary>
-        internal InputFile Owner { get; set; }
+        internal InputFile Owner { get; set; } = new();
 
         /// <summary>
         /// The stream.
         /// </summary>
-        private Stream stream;
+        private Stream? stream;
 
         /// <summary>
         /// The event that is called when the data is read.
         /// </summary>
-        public event EventHandler OnDataRead;
+        public event EventHandler? OnDataRead;
 
         /// <summary>
         /// Gets or sets the identifier.
@@ -45,12 +45,12 @@ namespace BlazorInputFile
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the new file name (The one that is used on the server to provide unique links).
         /// </summary>
-        public string NewFileName { get; set; }
+        public string NewFileName { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the size.
@@ -60,7 +60,7 @@ namespace BlazorInputFile
         /// <summary>
         /// Gets or sets the type.
         /// </summary>
-        public string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets the data stream.
@@ -79,7 +79,7 @@ namespace BlazorInputFile
         /// </summary>
         internal void RaiseOnDataRead()
         {
-            this.OnDataRead?.Invoke(this, null);
+            this.OnDataRead?.Invoke(this, new EventArgs());
         }
     }
 }

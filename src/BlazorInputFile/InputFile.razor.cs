@@ -17,6 +17,8 @@ namespace BlazorInputFile
     using Microsoft.AspNetCore.Components;
     using Microsoft.JSInterop;
 
+    /// <inheritdoc cref="IDisposable"/>
+    /// <inheritdoc cref="ComponentBase"/>
     /// <summary>
     ///     This class contains the logic for the <see cref="InputFile" /> page.
     /// </summary>
@@ -44,8 +46,7 @@ namespace BlazorInputFile
         ///     Gets or sets the unmatched parameters.
         /// </summary>
         [Parameter(CaptureUnmatchedValues = true)]
-        // ReSharper disable once UnusedMember.Global
-        public Dictionary<string, object> UnmatchedParameters { get; set; }
+        public Dictionary<string, object> UnmatchedParameters { get; set; } = new();
 
         /// <summary>
         ///     Gets or sets the input file reference.
@@ -56,20 +57,18 @@ namespace BlazorInputFile
         ///     Gets or sets the JavaScript runtime.
         /// </summary>
         [Inject]
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        private IJSRuntime JavascriptRuntime { get; set; }
+        private IJSRuntime? JavascriptRuntime { get; set; }
 
         /// <summary>
         ///     Gets or sets the <see cref="IDisposable" /> reference.
         /// </summary>
-        private IDisposable ThisReference { get; set; }
+        private IDisposable? ThisReference { get; set; }
 
-        /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
+        /// <inheritdoc cref="IDisposable"/>
         void IDisposable.Dispose()
         {
             this.ThisReference?.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -79,36 +78,27 @@ namespace BlazorInputFile
         /// <returns>A <see cref="Stream" /> with the file content.</returns>
         internal Stream OpenFileStream(FileListEntry file)
         {
+            if (this.JavascriptRuntime is null)
+            {
+                throw new InvalidOperationException("The JavaScript runtime wasn't initialized properly");
+            }
+
             return SharedMemoryFileListEntryStream.IsSupported(this.JavascriptRuntime)
                        ? (Stream)new SharedMemoryFileListEntryStream(this.JavascriptRuntime, this.InputFileElement, file)
                        : new RemoteFileListEntryStream(this.JavascriptRuntime, this.InputFileElement, file, this.MaximumMessageSize, this.MaximumBufferSize);
         }
 
-        /// <summary>
-        ///     Method invoked after each time the component has been rendered. Note that the component does
-        ///     not automatically re-render after the completion of any returned <see cref="T:System.Threading.Tasks.Task" />,
-        ///     because
-        ///     that would cause an infinite render loop.
-        /// </summary>
-        /// <param name="firstRender">
-        ///     Set to <c>true</c> if this is the first time
-        ///     <see cref="M:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(System.Boolean)" /> has been invoked
-        ///     on this component instance; otherwise <c>false</c>.
-        /// </param>
-        /// <returns>A <see cref="T:System.Threading.Tasks.Task" /> representing any asynchronous operation.</returns>
-        /// <remarks>
-        ///     The <see cref="M:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(System.Boolean)" /> and
-        ///     <see cref="M:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync(System.Boolean)" /> lifecycle methods
-        ///     are useful for performing interop, or interacting with values received from <c>@ref</c>.
-        ///     Use the <paramref name="firstRender" /> parameter to ensure that initialization work is only performed
-        ///     once.
-        /// </remarks>
+        /// <inheritdoc cref="ComponentBase"/>
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
                 this.ThisReference = DotNetObjectReference.Create(this);
-                await this.JavascriptRuntime.InvokeAsync<object>("BlazorInputFile.init", this.InputFileElement, this.ThisReference);
+
+                if (this.JavascriptRuntime is not null)
+                {
+                    await this.JavascriptRuntime.InvokeAsync<object>("BlazorInputFile.init", this.InputFileElement, this.ThisReference);
+                }
             }
         }
     }

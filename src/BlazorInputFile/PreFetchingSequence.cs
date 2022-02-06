@@ -11,7 +11,6 @@ namespace BlazorInputFile
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
     /// <summary>
@@ -23,32 +22,26 @@ namespace BlazorInputFile
         /// <summary>
         /// The fetch callback.
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         private readonly Func<long, CancellationToken, T> fetchCallback;
 
         /// <summary>
         /// The maximum buffer capacity.
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         private readonly int maximumBufferCapacity;
 
         /// <summary>
         /// The number of fetchable items.
         /// </summary>
-        // ReSharper disable once InconsistentNaming
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         private readonly long totalFetchableItems;
 
         /// <summary>
         /// The buffer.
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         private readonly Queue<T> buffer;
 
         /// <summary>
         /// The maximum fetched index.
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         private long maximumFetchedIndex;
 
         /// <summary>
@@ -57,7 +50,6 @@ namespace BlazorInputFile
         /// <param name="fetchCallback">The fetch callback.</param>
         /// <param name="totalFetchableItems">The number of fetchable items.</param>
         /// <param name="maximumBufferCapacity">The maximum buffer capacity.</param>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public PreFetchingSequence(Func<long, CancellationToken, T> fetchCallback, long totalFetchableItems, int maximumBufferCapacity)
         {
             this.fetchCallback = fetchCallback;
@@ -70,10 +62,12 @@ namespace BlazorInputFile
         /// Reads the next data.
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>An <see cref="object"/> of type <see cref="T"/>.</returns>
+        /// <result>An <see cref="object"/> of the generic type.</result>
+        /// <exception cref="InvalidOperationException">There are no more entries to read.</exception>
         public T ReadNext(CancellationToken cancellationToken)
         {
             this.EnqueueFetches(cancellationToken);
+
             if (this.buffer.Count == 0)
             {
                 throw new InvalidOperationException("There are no more entries to read.");
@@ -87,9 +81,9 @@ namespace BlazorInputFile
         /// <summary>
         /// Tries to peek the next data.
         /// </summary>
-        /// <param name="result">An <see cref="object"/> of type <see cref="T"/>.</param>
+        /// <param name="result">An <see cref="object"/> of the generic type.</param>
         /// <returns><c>true</c> if successful, <c>false</c> if not.</returns>
-        public bool TryPeekNext(out T result)
+        public bool TryPeekNext(out T? result)
         {
             if (this.buffer.Count > 0)
             {

@@ -60,7 +60,13 @@ namespace FileUpload.Server
         {
             app.Use((context, next) =>
             {
-                context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize = null;
+                var service = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
+
+                if (service is not null)
+                {
+                    service.MaxRequestBodySize = null;
+                }
+                
                 return next.Invoke();
             });
 

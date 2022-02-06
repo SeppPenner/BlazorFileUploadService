@@ -26,13 +26,13 @@ namespace BlazorInputFile
         /// <summary>
         /// The mono WebAssembly JavaScript runtime type.
         /// </summary>
-        private static readonly Type MonoWebAssemblyJavascriptRuntimeType
+        private static readonly Type? MonoWebAssemblyJavascriptRuntimeType
             = Type.GetType("Mono.WebAssembly.Interop.MonoWebAssemblyJSRuntime, Mono.WebAssembly.Interop");
 
         /// <summary>
         /// The cached invoke unmarshalled method information.
         /// </summary>
-        private static MethodInfo cachedInvokeUnmarshalledMethodInfo;
+        private static MethodInfo? cachedInvokeUnmarshalledMethodInfo;
 
         /// <inheritdoc cref="FileListEntryStream" />
         /// <summary>
@@ -78,6 +78,12 @@ namespace BlazorInputFile
                 this.File.Id);
 
             var methodInfo = GetCachedInvokeUnmarshalledMethodInfo();
+
+            if (methodInfo is null)
+            {
+                return 0;
+            }
+
             var readRequest = new ReadRequest
             {
                 InputFileElementReferenceId = this.InputFileElement.Id,
@@ -88,18 +94,24 @@ namespace BlazorInputFile
                 MaximumBytes = maxBytes
             };
 
-            return (int)methodInfo.Invoke(this.JavascriptRuntime, new object[] { "BlazorInputFile.readFileDataSharedMemory", readRequest });
+            var value = methodInfo.Invoke(this.JavascriptRuntime, new object[] { "BlazorInputFile.readFileDataSharedMemory", readRequest });
+            return value is null ? 0 : (int)value;
         }
 
         /// <summary>
         /// Gets the cached unmarshalled method information.
         /// </summary>
         /// <returns>The <see cref="MethodInfo"/>.</returns>
-        private static MethodInfo GetCachedInvokeUnmarshalledMethodInfo()
+        private static MethodInfo? GetCachedInvokeUnmarshalledMethodInfo()
         {
-            if (cachedInvokeUnmarshalledMethodInfo != null)
+            if (cachedInvokeUnmarshalledMethodInfo is not null)
             {
                 return cachedInvokeUnmarshalledMethodInfo;
+            }
+
+            if (MonoWebAssemblyJavascriptRuntimeType is null)
+            {
+                return null;
             }
 
             foreach (var possibleMethodInfo in MonoWebAssemblyJavascriptRuntimeType.GetMethods())

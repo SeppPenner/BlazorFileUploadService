@@ -10,7 +10,6 @@
 namespace FileUpload.Core.Pages
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Threading.Tasks;
 
@@ -31,28 +30,25 @@ namespace FileUpload.Core.Pages
         /// <summary>
         /// Gets or sets the selected files.
         /// </summary>
-        protected IFileListEntry[] SelectedFiles { get; set; }
+        protected IFileListEntry[] SelectedFiles { get; set; } = Array.Empty<FileListEntry>();
 
         /// <summary>
         ///     Gets or sets the database helper.
         /// </summary>
         [Inject]
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        private IDatabaseHelper DatabaseHelper { get; set; }
+        private IDatabaseHelper DatabaseHelper { get; set; } = new DatabaseHelper();
 
         /// <summary>
         /// Gets or sets the JavaScript runtime.
         /// </summary>
         [Inject]
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        private IJSRuntime JavascriptRuntime { get; set; }
+        private IJSRuntime? JavascriptRuntime { get; set; }
 
         /// <summary>
         /// Gets or sets the navigation manager.
         /// </summary>
         [Inject]
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        private NavigationManager NavigationManager { get; set; }
+        private NavigationManager? NavigationManager { get; set; }
 
         /// <summary>
         /// The logger.
@@ -72,11 +68,11 @@ namespace FileUpload.Core.Pages
         /// <summary>
         /// Gets the download link for the given file.
         /// </summary>
-        /// <param name="file"></param>
-        /// <returns></returns>
+        /// <param name="file">The given file.</param>
+        /// <returns>The download link.</returns>
         protected string GetDownloadLink(IFileListEntry file)
         {
-            return string.IsNullOrWhiteSpace(file.NewFileName) ? string.Empty : $"{this.NavigationManager.BaseUri}file/{file.NewFileName}";
+            return string.IsNullOrWhiteSpace(file.NewFileName) ? string.Empty : $"{this.NavigationManager!.BaseUri}file/{file.NewFileName}";
         }
 
         /// <summary>
@@ -148,12 +144,17 @@ namespace FileUpload.Core.Pages
         /// </summary>
         /// <param name="ex">The <see cref="Exception"/> to catch.</param>
         /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         private async Task TryLogError(Exception ex)
         {
             try
             {
                 var message = $"Exception: {ex.Message} {ex.StackTrace}";
+
+                if (this.JavascriptRuntime is null)
+                {
+                    return;
+                }
+
                 await this.JavascriptRuntime.InvokeAsync<string>("console.log", message);
                 this.logger.Error(message);
             }
