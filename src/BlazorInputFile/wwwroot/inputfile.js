@@ -47,8 +47,6 @@
         readFileDataSharedMemory: function (readRequest) {
             // This uses various unsupported internal APIs. Beware that if you also use them,
             // your code could become broken by any update.
-            // ReSharper disable UseOfImplicitGlobalInFunctionScope
-            // ReSharper disable PossiblyUnassignedProperty
             const inputFileElementReferenceId = Blazor.platform.readStringField(readRequest, 0);
             const inputFileElement = document.querySelector(`[_bl_${inputFileElementReferenceId}]`);
             const fileId = Blazor.platform.readInt32Field(readRequest, 4);

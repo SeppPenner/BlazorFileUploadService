@@ -33,7 +33,6 @@ namespace FileUpload.WebAssembly
         /// Configures the application.
         /// </summary>
         /// <param name="app">The <see cref="IComponentsApplicationBuilder"/>.</param>
-        // ReSharper disable once UnusedMember.Global
         public void Configure(IComponentsApplicationBuilder app)
         {
             app.AddComponent<App>("app");

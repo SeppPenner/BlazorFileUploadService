@@ -55,7 +55,6 @@ namespace FileUpload.Server
         /// </summary>
         /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
         /// <param name="env">The <see cref="IWebHostEnvironment"/>.</param>
-        // ReSharper disable once UnusedMember.Global
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.Use((context, next) =>

@@ -35,31 +35,26 @@ namespace BlazorInputFile
         /// <summary>
         ///     The block sequence.
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         private readonly PreFetchingSequence<Block> blockSequence;
 
         /// <summary>
         ///     The current block decoding buffer.
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         private readonly byte[] currentBlockDecodingBuffer;
 
         /// <summary>
         ///     The maximum message size.
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         private readonly int maximumMessageSize;
 
         /// <summary>
         ///     The current block.
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         private Block? currentBlock;
 
         /// <summary>
         ///     The current block decoding buffer already consumed length.
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         private int currentBlockDecodingBufferConsumedLength;
 
         /// <inheritdoc cref="FileListEntryStream" />
@@ -145,7 +140,6 @@ namespace BlazorInputFile
         /// <param name="offset">The offset.</param>
         /// <param name="maximumBytesToRead">The maximum bytes to read.</param>
         /// <returns>The number of decoded bytes.</returns>
-        // ReSharper disable once UnusedMethodReturnValue.Local
         private static int DecodeBase64ToBuffer(string base64, byte[] buffer, int offset, int maximumBytesToRead)
         {
 #if NETSTANDARD2_1

@@ -10,7 +10,6 @@
     /// <param name="files">The files.</param>
     /// <returns>A <see cref="Task" /> representing any asynchronous operation.</returns>
     [JSInvokable]
-    // ReSharper disable once UnusedMember.Global
     public Task NotifyChange(FileListEntry[] files)
     {
         foreach (var file in files)

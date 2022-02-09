@@ -16,7 +16,6 @@ namespace BlazorInputFile
     /// <summary>
     /// This class extends the <see cref="IFileListEntry"/> functionality.
     /// </summary>
-    // ReSharper disable once UnusedMember.Global
     public static class FileListEntryExtensions
     {
         /// <summary>
@@ -28,7 +27,6 @@ namespace BlazorInputFile
         /// <param name="fileListEntry">The <see cref="IFileListEntry"/>.</param>
         /// <param name="maxSizeBytes">The maximum amount of data to accept.</param>
         /// <returns>A <see cref="MemoryStream"/> of the file data.</returns>
-        // ReSharper disable once UnusedMember.Global
         public static async Task<MemoryStream> ReadAllAsync(this IFileListEntry fileListEntry, int maxSizeBytes = 1024 * 1024)
         {
             if (fileListEntry is null)

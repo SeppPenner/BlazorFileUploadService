@@ -59,7 +59,6 @@ namespace FileUpload.Core.Pages
         /// Handles the selected files.
         /// </summary>
         /// <param name="files">The files.</param>
-        // ReSharper disable once UnusedMember.Global
         protected void HandleSelection(IFileListEntry[] files)
         {
             this.SelectedFiles = files;
@@ -115,7 +114,6 @@ namespace FileUpload.Core.Pages
         /// </summary>
         /// <param name="file">The file.</param>
         /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-        // ReSharper disable once UnusedMember.Global
         protected async Task UploadFile(IFileListEntry file)
         {
             try

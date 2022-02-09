@@ -40,7 +40,6 @@ namespace BlazorInputFile
         /// <summary>
         /// The position.
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         private long position;
 
         /// <summary>
