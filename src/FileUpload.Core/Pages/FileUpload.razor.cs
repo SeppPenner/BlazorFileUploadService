@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FileUpload.razor.cs" company="Hämmer Electronics">
 //   The project is licensed under the MIT license.
 // </copyright>
@@ -9,19 +9,6 @@
 
 namespace FileUpload.Core.Pages
 {
-    using System;
-    using System.IO;
-    using System.Threading.Tasks;
-
-    using BlazorInputFile;
-
-    using global::FileUpload.Core.Database;
-
-    using Microsoft.AspNetCore.Components;
-    using Microsoft.JSInterop;
-
-    using Serilog;
-
     /// <summary>
     ///     This class contains the logic for the <see cref="FileUpload" /> page.
     /// </summary>

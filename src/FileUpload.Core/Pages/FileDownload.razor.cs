@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FileDownload.razor.cs" company="Hämmer Electronics">
 //   The project is licensed under the MIT license.
 // </copyright>
@@ -7,116 +7,103 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace FileUpload.Core.Pages
+namespace FileUpload.Core.Pages;
+
+/// <summary>
+///     This class contains the logic for the <see cref="FileDownload" /> page.
+/// </summary>
+public class FileDownloadBase : ComponentBase
 {
-    using System;
-    using System.Threading.Tasks;
-
-    using global::FileUpload.Core.Database;
-
-    using Microsoft.AspNetCore.Components;
-    using Microsoft.JSInterop;
-
-    using Serilog;
-
-    using IoFile = System.IO.File;
+    /// <summary>
+    ///     Gets or sets the file identifier.
+    /// </summary>
+    [Parameter]
+    public string FileId { get; set; } = string.Empty;
 
     /// <summary>
-    ///     This class contains the logic for the <see cref="FileDownload" /> page.
+    ///     Gets or sets the file model.
     /// </summary>
-    public class FileDownloadBase : ComponentBase
+    protected FileModel File { get; set; } = new();
+
+    /// <summary>
+    /// Gets or sets the JavaScript runtime.
+    /// </summary>
+    [Inject]
+    private IJSRuntime? JavascriptRuntime { get; set; }
+
+    /// <summary>
+    ///     Gets or sets the database helper.
+    /// </summary>
+    [Inject]
+    private IDatabaseHelper DatabaseHelper { get; set; } = new DatabaseHelper();
+
+    /// <summary>
+    /// The logger.
+    /// </summary>
+    private readonly ILogger logger = Log.ForContext<FileDownloadBase>();
+
+    /// <summary>
+    /// Method invoked when the component has received parameters from its parent in
+    /// the render tree, and the incoming values have been assigned to properties.
+    /// </summary>
+    /// <returns>A <see cref="T:System.Threading.Tasks.Task" /> representing any asynchronous operation.</returns>
+    protected override async Task OnParametersSetAsync()
     {
-        /// <summary>
-        ///     Gets or sets the file identifier.
-        /// </summary>
-        [Parameter]
-        public string FileId { get; set; } = string.Empty;
-
-        /// <summary>
-        ///     Gets or sets the file model.
-        /// </summary>
-        protected FileModel File { get; set; } = new();
-
-        /// <summary>
-        /// Gets or sets the JavaScript runtime.
-        /// </summary>
-        [Inject]
-        private IJSRuntime? JavascriptRuntime { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the database helper.
-        /// </summary>
-        [Inject]
-        private IDatabaseHelper DatabaseHelper { get; set; } = new DatabaseHelper();
-
-        /// <summary>
-        /// The logger.
-        /// </summary>
-        private readonly ILogger logger = Log.ForContext<FileDownloadBase>();
-
-        /// <summary>
-        /// Method invoked when the component has received parameters from its parent in
-        /// the render tree, and the incoming values have been assigned to properties.
-        /// </summary>
-        /// <returns>A <see cref="T:System.Threading.Tasks.Task" /> representing any asynchronous operation.</returns>
-        protected override async Task OnParametersSetAsync()
+        try
         {
-            try
-            {
-                this.File = await this.DatabaseHelper.GetFileById(this.FileId);
-            }
-            catch (Exception ex)
-            {
-                await this.TryLogError(ex);
-            }
+            this.File = await this.DatabaseHelper.GetFileById(this.FileId);
         }
-
-        /// <summary>
-        /// Downloads the file.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-        protected async Task DownloadFile()
+        catch (Exception ex)
         {
-            try
-            {
-                var fileData = IoFile.ReadAllBytes(this.File.FilePath);
-
-                if (this.JavascriptRuntime is null)
-                {
-                    return;
-                }
-
-                await this.JavascriptRuntime.InvokeAsync<string>("window.downloadHelper.downloadFile", fileData, this.File.FileName, this.File.Type);
-            }
-            catch (Exception ex)
-            {
-                await this.TryLogError(ex);
-            }
+            await this.TryLogError(ex);
         }
+    }
 
-        /// <summary>
-        /// ´Tries to log the error to the Browser console and Serilog, catches errors and only logs to Serilog if needed.
-        /// </summary>
-        /// <param name="ex">The <see cref="Exception"/> to catch.</param>
-        /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-        private async Task TryLogError(Exception ex)
+    /// <summary>
+    /// Downloads the file.
+    /// </summary>
+    /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
+    protected async Task DownloadFile()
+    {
+        try
         {
-            try
-            {
-                var message = $"Exception: {ex.Message} {ex.StackTrace}";
+            var fileData = IoFile.ReadAllBytes(this.File.FilePath);
 
-                if (this.JavascriptRuntime is null)
-                {
-                    return;
-                }
-
-                await this.JavascriptRuntime.InvokeAsync<string>("console.log", message);
-                this.logger.Error(message);
-            }
-            catch (Exception exception)
+            if (this.JavascriptRuntime is null)
             {
-                this.logger.Error("An error occured: {exception}.", exception);
+                return;
             }
+
+            await this.JavascriptRuntime.InvokeAsync<string>("window.downloadHelper.downloadFile", fileData, this.File.FileName, this.File.Type);
+        }
+        catch (Exception ex)
+        {
+            await this.TryLogError(ex);
+        }
+    }
+
+    /// <summary>
+    /// ´Tries to log the error to the Browser console and Serilog, catches errors and only logs to Serilog if needed.
+    /// </summary>
+    /// <param name="ex">The <see cref="Exception"/> to catch.</param>
+    /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
+    private async Task TryLogError(Exception ex)
+    {
+        try
+        {
+            var message = $"Exception: {ex.Message} {ex.StackTrace}";
+
+            if (this.JavascriptRuntime is null)
+            {
+                return;
+            }
+
+            await this.JavascriptRuntime.InvokeAsync<string>("console.log", message);
+            this.logger.Error(message);
+        }
+        catch (Exception exception)
+        {
+            this.logger.Error("An error occured: {exception}.", exception);
         }
     }
 }
