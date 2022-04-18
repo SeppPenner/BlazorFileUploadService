@@ -23,14 +23,14 @@ The WebAssembly project doesn't work yet.
 ## Inspired by
 * https://bayfiles.com/
 * https://anonfiles.com/
-* https://openload.cc/
-* https://letsupload.cc/
+* ~~https://openload.cc/~~
+* ~~https://letsupload.cc/~~
 * ~~https://megaupload.nz/~~
-* https://share-online.is/
-* https://rapidshare.nu/
-* https://forumfiles.com/
-* https://vshare.is/
-* https://uplovd.com/
+* ~~https://share-online.is/~~
+* ~~https://rapidshare.nu/~~
+* ~~https://forumfiles.com/~~
+* ~~https://vshare.is/~~
+* ~~https://uplovd.com/~~
 * https://ddownload.com/
 * https://douploads.net/
 * http://hexupload.net/
