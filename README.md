@@ -23,8 +23,8 @@ The WebAssembly project doesn't work yet.
 ## Inspired by
 * https://bayfiles.com/
 * https://anonfiles.com/
-* ~~https://openload.cc/~~
-* ~~https://letsupload.cc/~~
+* https://openload.cc/
+* https://letsupload.cc/
 * ~~https://megaupload.nz/~~
 * ~~https://share-online.is/~~
 * ~~https://rapidshare.nu/~~
@@ -34,6 +34,7 @@ The WebAssembly project doesn't work yet.
 * https://ddownload.com/
 * https://douploads.net/
 * http://hexupload.net/
+* https://filechan.org
 
 ## Further links
 * https://blog.stevensanderson.com/2019/09/13/blazor-inputfile/
