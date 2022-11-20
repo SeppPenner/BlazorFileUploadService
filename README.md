@@ -25,16 +25,20 @@ The WebAssembly project doesn't work yet.
 * https://anonfiles.com/
 * https://openload.cc/
 * https://letsupload.cc/
-* ~~https://megaupload.nz/~~
-* ~~https://share-online.is/~~
-* ~~https://rapidshare.nu/~~
-* ~~https://forumfiles.com/~~
-* ~~https://vshare.is/~~
-* ~~https://uplovd.com/~~
+* https://megaupload.nz/
+* https://share-online.is/
+* https://rapidshare.nu/
+* https://forumfiles.com/
+* https://vshare.is/
+* https://uplovd.com/
 * https://ddownload.com/
 * https://douploads.net/
 * http://hexupload.net/
 * https://filechan.org
+* https://myfile.is/
+* https://upvid.cc/
+* https://lolabits.se/
+* https://hotfile.io/
 
 ## Further links
 * https://blog.stevensanderson.com/2019/09/13/blazor-inputfile/
