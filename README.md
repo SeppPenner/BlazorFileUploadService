@@ -11,6 +11,9 @@ The project is heavily based on the [BlazorInputFile](https://github.com/SteveSa
 [![GitHub stars](https://img.shields.io/github/stars/SeppPenner/BlazorFileUploadService.svg)](https://github.com/SeppPenner/BlazorFileUploadService/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/SeppPenner/BlazorFileUploadService/master/License.txt)
 [![Known Vulnerabilities](https://snyk.io/test/github/SeppPenner/BlazorFileUploadService/badge.svg)](https://snyk.io/test/github/SeppPenner/BlazorFileUploadService)
+[![Blogger](https://img.shields.io/badge/Follow_me_on-blogger-orange)](https://franzhuber23.blogspot.de/)
+[![Patreon](https://img.shields.io/badge/Patreon-F96854?logo=patreon&logoColor=white)](https://patreon.com/SeppPennerOpenSourceDevelopment)
+[![PayPal](https://img.shields.io/badge/PayPal-00457C?logo=paypal&logoColor=white)](https://paypal.me/th070795)
 
 ## Screenshots
 ![Screenshot 1](Screenshot1.PNG "Screenshot 1")

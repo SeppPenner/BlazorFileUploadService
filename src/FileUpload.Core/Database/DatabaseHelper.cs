@@ -116,11 +116,11 @@ public class DatabaseHelper : IDatabaseHelper
     /// <param name="identifier">The identifier.</param>
     /// <returns>A <see cref="Task" /> representing any asynchronous operation.</returns>
     /// <seealso cref="IDatabaseHelper" />
-    public async Task<FileModel> GetFileById(string identifier)
+    public async Task<FileModel?> GetFileById(string identifier)
     {
         using var connection = new SQLiteConnection(this.GetConnectionString());
         await connection.OpenAsync();
-        return await connection.QueryFirstOrDefaultAsync<FileModel>(SqlStatements.SelectFileById, new { Id = identifier });
+        return await connection.QueryFirstOrDefaultAsync<FileModel?>(SqlStatements.SelectFileById, new { Id = identifier });
     }
 
     /// <inheritdoc cref="IDatabaseHelper" />

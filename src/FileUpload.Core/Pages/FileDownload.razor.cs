@@ -51,7 +51,14 @@ public class FileDownloadBase : ComponentBase
     {
         try
         {
-            this.File = await this.DatabaseHelper.GetFileById(this.FileId);
+            var file = await this.DatabaseHelper.GetFileById(this.FileId);
+
+            if (file is null)
+            {
+                return;
+            }
+
+            this.File = file;
         }
         catch (Exception ex)
         {
@@ -99,11 +106,13 @@ public class FileDownloadBase : ComponentBase
             }
 
             await this.JavascriptRuntime.InvokeAsync<string>("console.log", message);
+#pragma warning disable Serilog004 // Constant MessageTemplate verifier
             this.logger.Error(message);
+#pragma warning restore Serilog004 // Constant MessageTemplate verifier
         }
         catch (Exception exception)
         {
-            this.logger.Error("An error occured: {exception}.", exception);
+            this.logger.Error(exception, "An error occured");
         }
     }
 }

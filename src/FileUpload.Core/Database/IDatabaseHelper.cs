@@ -36,7 +36,7 @@ public interface IDatabaseHelper
     /// </summary>
     /// <param name="identifier">The identifier.</param>
     /// <returns>A <see cref="Task" /> representing any asynchronous operation.</returns>
-    Task<FileModel> GetFileById(string identifier);
+    Task<FileModel?> GetFileById(string identifier);
 
     /// <summary>
     /// Creates the files table.
